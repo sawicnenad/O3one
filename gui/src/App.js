@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+import Exposure from './views/Exposure';
 
 
 function App() {
-    return(<div>O3one</div>);
+    return(
+        <Suspense fallback="loading">
+            <Exposure />
+        </Suspense>
+    );
 }
 export default App;
