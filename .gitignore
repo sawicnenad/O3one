@@ -4,4 +4,5 @@ __pycache__
 migrations
 static
 node_modules
+dist
 package_lock.json
