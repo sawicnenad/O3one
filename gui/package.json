@@ -39,6 +39,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.3.0",
     "antd": "^4.9.4",
     "i18next": "^19.8.4",
     "i18next-browser-languagedetector": "^6.0.1",

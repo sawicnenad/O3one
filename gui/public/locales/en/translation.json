@@ -1,3 +1,26 @@
 {
-    "test": "This is a test"
+    "exposure": {
+        "assessment": {
+            "var-groups": {
+                "product": "Chemical product",
+                "activity": "Activity task",
+                "controls": "Exposure controls",
+                "results": "Evaluated results"
+            },
+            "alerts": {
+                "field-no-option": "Please check if you have provided values for all fields above"
+            }
+        },
+        "fields": {
+            "labels": {
+                "art": {
+                    "physical-form": "Physical form",
+                    "vp": "Vapour pressure",
+                    "mole-fraction": "Mole fraction",
+                    "activity-coef": "Activity coefficient",
+                    "activity-class": "Activity class"
+                }
+            }
+        }
+    }
 }

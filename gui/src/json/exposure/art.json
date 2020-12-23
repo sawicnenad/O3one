@@ -1,0 +1,100 @@
+[
+    {
+        "name": "state",
+        "group": "product",
+        "type": "select",
+        "label": "exposure.fields.labels.art.physical-form",
+        "options": [
+            {
+                "label": "exposure.fields.options.art.powder",
+                "value": "powder"
+            }, {
+                "label": "exposure.fields.options.art.liquid",
+                "value": "liquid"
+            }, {
+                "label": "exposure.fields.options.art.solid",
+                "value": "solid"
+            }
+        ]
+    }, {
+        "name": "vp",
+        "group": "product",
+        "type": "numeric",
+        "label": "exposure.fields.labels.art.vp",
+        "props": {
+            "max": 100000.0,
+            "min": 0.01
+        }
+    }, {
+        "name": "mf",
+        "group": "product",
+        "type": "numeric",
+        "label": "exposure.fields.labels.art.mole-fraction",
+        "props": {
+            "max": 1.0,
+            "min": 0.0001
+        }
+    }, {
+        "name": "ac",
+        "group": "product",
+        "type": "numeric",
+        "label": "exposure.fields.labels.art.activity-coef",
+        "props": {
+            "max": 40,
+            "min": 0.0001
+        }
+    }, {
+        "name": "activity",
+        "group": "activity",
+        "label": "exposure.fields.labels.art.activity-class",
+        "type": "select",
+        "link": "state",
+        "options": {
+            "liquid": [
+                {
+                    "value": "spraying-liquid",
+                    "label": "exposure.fields.options.art.spraying-liquid"
+                }, {
+                    "value": "evaporation",
+                    "label": "exposure.fields.options.art.evaporation"
+                }, {
+                    "value": "handling-liquid",
+                    "label": "exposure.fields.options.art.handling-liquid"
+                }, {
+                    "value": "spreading",
+                    "label": "exposure.fields.options.art.spreading"
+                }, {
+                    "value": "high-speed-process",
+                    "label": "exposure.fields.options.art.high-speed-process"
+                }, {
+                    "value": "transfer-liquid",
+                    "label": "exposure.fields.options.art.transfer-liquid"
+                }
+            ],
+            "powder": [
+                {
+                    "value": "impaction",
+                    "label": "exposure.fields.options.art.impaction"
+                }, {
+                    "value": "handling-powder",
+                    "label": "exposure.fields.options.art.handling-powder"
+                }, {
+                    "value": "spraying-powder",
+                    "label": "exposure.fields.options.art.spraying-powder"
+                }, {
+                    "value": "moving",
+                    "label": "exposure.fields.options.art.moving"
+                }, {
+                    "value": "transfer-powder",
+                    "label": "exposure.fields.options.art.transfer-powder"
+                }, {
+                    "value": "compressing",
+                    "label": "exposure.fields.options.art.compressing"
+                }, {
+                    "value": "fracturing",
+                    "label": "exposure.fields.options.art.fracturing"
+                }
+            ]
+        }
+    }
+]
