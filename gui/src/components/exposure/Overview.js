@@ -1,7 +1,14 @@
-import { Button, Col, Row } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
+import { Card, Row, Col, Space, Divider } from 'antd';
+import {
+    DeleteOutlined,
+    EditOutlined,
+    CheckCircleOutlined,
+    CheckOutlined,
+    ExperimentOutlined,
+    CodepenOutlined
+} from '@ant-design/icons';
 
 
 /*
@@ -10,46 +17,65 @@ import { useTranslation } from 'react-i18next';
 */
 function Overview() {
     const { t } = useTranslation();
+    const esData = require('../../json/sample.json').es;
+
+
+    const innerCardLayout = {
+        md: { span: 8 },
+        xs: { span: 24 }
+    }
 
     return(
         <div>
-            <header>
-                <Button>{ t('create-new') }</Button>
-            </header>
+            {
+                esData.map(
+                    es => (
+                        <Card 
+                            key={es.id}
+                            title={es.name}
+                            style={{ marginTop: 15 }}
+                            actions={[
+                                <DeleteOutlined key="delete" />,
+                                <EditOutlined key="edit" />
+                            ]}
+                        >
+                            
+                            <Row>
+                                <Col {...innerCardLayout}>
+                                    {
+                                        es.substance ?
+                                        <Space>
+                                            <CheckOutlined />
+                                            {t('substance')}
+                                        </Space>
+                                        : <Space>
+                                            <CheckCircleOutlined />
+                                            {t('product')}
+                                        </Space>
+                                    }
+                                </Col>
 
-            <section>
-                <div className="es-item">
-                    <div 
-                        style={{
-                            border: "1px solid silver",
-                            height: "200px",
-                            marginTop: 15
-                        }}
-                    >
-                        <Row style={{ borderBottom: "1px solid silver" }}>
-                            <Col span="16">
-                                <h3>
-                                    Exposure Situation #1
-                                </h3>
-                            </Col>
-                       
-                            <Col span="8">
-                                <div style={{
-                                    textAlign: "right"
-                                }}>
-                                    <Button>
-                                        {t('edit')}
-                                    </Button>
+                                <Col {...innerCardLayout}>
+                                    <Space>
+                                        <ExperimentOutlined />
+                                        {es.substance ? es.substance.name : ""}
+                                        {es.product ? es.product.name : ""}
+                                        {!es.product && !es.substance ? <i>{t('unspecified')}</i> : ""}
+                                    </Space>
+                                </Col>
 
-                                    <Button>
-                                        {t('delete')}
-                                    </Button>
-                                </div>
-                            </Col>
-                        </Row>
-                    </div>
-                </div>
-            </section>
+                                <Col {...innerCardLayout}>
+                                    <Space>
+                                        <CodepenOutlined />
+                                        {es.workplace ? es.workplace.name : <i>{t('unspecified')}</i>}
+                                    </Space>
+                                </Col>
+                            </Row>
+                            <Divider orientation="left">{t('exposure-models')}</Divider>
+                        </Card>
+                    )
+                )
+            }
         </div>
     )
 }

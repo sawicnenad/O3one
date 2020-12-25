@@ -1,19 +1,37 @@
 {
+    "save": "Save",
+    "cancel": "Cancel",
+    "substance": "Substance",
+    "product": "Product",
+    "please-select": "Please select",
+    "date-created": "Created",
+    "last-modified": "Last modified",
+    "department": "Department",
+    "workplace": "Workplace",
+    "unspecified": "Unspecified",
+    "exposure-models": "Exposure models",
     "messages": {
         "required": "Must not be empty"
     },
     "models": {
         "art": "Advanced REACH Tool",
         "stoffenmanager": "Stoffenmanager",
-        "ecetoc": "ECETOC TRAv3"
+        "ecetoc": "ECETOC TRAv3",
+        "o3-description": "O3 employs a machine learning technique - constantly trained on evidence data - to predict the exposure"
     },
     "exposure": {
         "es": {
             "new-es": "New exposure situation",
+            "general": "General",
+            "exposure-models": "Exposure models",
+            "product": "Substance/product",
             "name": "Name",
             "description": "Description",
+            "models-info": "At least one exposure model should be selected",
             "reach-models": "REACH exposure models",
-            "ozone-models": "O3one exposure models"
+            "ozone-models": "O3one exposure models",
+            "substance-or-product": "Chemical type",
+            "none": "None"
         },
         "assessment": {
             "var-groups": {

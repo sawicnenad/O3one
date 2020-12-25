@@ -1,0 +1,16 @@
+{
+    "es": [
+        {
+            "id": 1,
+            "name": "Exposure situation - transfer of liquids in department 1A",
+            "substance": {
+                "id": 1,
+                "name": "Substance 1"
+            },
+            "art": true,
+            "sm": false,
+            "tra": false,
+            "o3": true
+        }
+    ]
+}

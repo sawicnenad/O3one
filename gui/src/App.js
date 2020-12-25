@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Exposure from './views/Exposure';
-
+import './styling/app.css';
 
 function App() {
     return(
