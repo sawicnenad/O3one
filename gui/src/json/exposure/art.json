@@ -4,6 +4,7 @@
         "group": "product",
         "type": "select",
         "label": "exposure.fields.labels.art.physical-form",
+        "visible": "default",
         "options": [
             {
                 "label": "exposure.fields.options.art.powder",
@@ -17,28 +18,79 @@
             }
         ]
     }, {
+        "name": "dustiness",
+        "group": "product",
+        "type": "select",
+        "conditions": [
+            "data.state === 'powder'"
+        ],
+        "label": "exposure.fields.labels.art.dustiness",
+        "options": [
+            {
+                "label": "exposure.fields.options.art.efine",
+                "value": "efine"
+            }, {
+                "label": "exposure.fields.options.art.fine",
+                "value": "fine"
+            }, {
+                "label": "exposure.fields.options.art.coarse",
+                "value": "coarse"
+            }, {
+                "label": "exposure.fields.options.art.gran",
+                "value": "gran"
+            }, {
+                "label": "exposure.fields.options.art.fgran",
+                "value": "fgran"
+            }
+        ]
+    }, {
         "name": "vp",
         "group": "product",
         "type": "numeric",
         "label": "exposure.fields.labels.art.vp",
+        "unit": "Pa",
+        "conditions": [
+            "data.state === 'liquid'"
+        ],
         "props": {
             "max": 100000.0,
             "min": 0.01
         }
     }, {
-        "name": "mf",
+        "name": "mc",
         "group": "product",
         "type": "numeric",
-        "label": "exposure.fields.labels.art.mole-fraction",
+        "label": "exposure.fields.labels.art.mole-conc",
+        "unit": "%",
+        "conditions": [
+            "data.state === 'liquid'"
+        ],
         "props": {
-            "max": 1.0,
-            "min": 0.0001
+            "max": 100,
+            "min": 0.01
+        }
+    }, {
+        "name": "wc",
+        "group": "product",
+        "type": "numeric",
+        "label": "exposure.fields.labels.art.weight-conc",
+        "unit": "%",
+        "conditions": [
+            "data.state !== 'liquid'"
+        ],
+        "props": {
+            "max": 100,
+            "min": 0.01
         }
     }, {
         "name": "ac",
         "group": "product",
         "type": "numeric",
         "label": "exposure.fields.labels.art.activity-coef",
+        "conditions": [
+            "data.state === 'liquid'",
+            "data.vp >= 10"
+        ],
         "props": {
             "max": 40,
             "min": 0.0001
@@ -49,6 +101,7 @@
         "label": "exposure.fields.labels.art.activity-class",
         "type": "select",
         "link": "state",
+        "visible": "default",
         "options": {
             "liquid": [
                 {
@@ -96,5 +149,56 @@
                 }
             ]
         }
+    }, {
+        "name": "lc",
+        "group": "controls",
+        "type": "select",
+        "visible": "default",
+        "label": "exposure.fields.labels.art.lc",
+        "options": [
+            {
+                "label": "exposure.fields.options.art.no-lc",
+                "value": "no"
+            }, {
+                "label": "exposure.fields.options.art.suppression",
+                "value": "suppression",
+                "options": [
+                    {
+                        "label": "exposure.fields.options.art.knockdown",
+                        "value": "knockdown"
+                    }, {
+                        "label": "exposure.fields.options.art.wetting",
+                        "value": "wetting"
+                    }
+                ]
+            }, {
+                "label": "exposure.fields.options.art.lev-receiving",
+                "value": "lev-receiving",
+                "options": [
+                    {
+                        "label": "exposure.fields.options.art.canopy",
+                        "value": "canopy"
+                    }, {
+                        "label": "exposure.fields.options.art.other-receiving",
+                        "value": "other-receiving"
+                    }
+                ]
+            }, {
+                "label": "exposure.fields.options.art.containment",
+                "value": "containment",
+                "options": [
+                    {
+                        "label": "exposure.fields.options.art.c-low",
+                        "value": "c-low"
+                    }, {
+                        "label": "exposure.fields.options.art.c-med",
+                        "value": "c-med"
+                    }, {
+                        "label": "exposure.fields.options.art.c-high",
+                        "value": "c-high"
+                    }
+                ]
+            } 
+        ]
     }
 ]

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Assessment from '../components/exposure/Assessment';
+import ExposureSituation from '../components/exposure/ExposureSituation';
 
 /*
     Exposure view
@@ -22,7 +22,7 @@ function Exposure() {
     const { t } = useTranslation();
     return(
         <div>
-            <Assessment />
+            <ExposureSituation />
         </div>
     )
 }

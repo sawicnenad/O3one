@@ -1,5 +1,20 @@
 {
+    "messages": {
+        "required": "Must not be empty"
+    },
+    "models": {
+        "art": "Advanced REACH Tool",
+        "stoffenmanager": "Stoffenmanager",
+        "ecetoc": "ECETOC TRAv3"
+    },
     "exposure": {
+        "es": {
+            "new-es": "New exposure situation",
+            "name": "Name",
+            "description": "Description",
+            "reach-models": "REACH exposure models",
+            "ozone-models": "O3one exposure models"
+        },
         "assessment": {
             "var-groups": {
                 "product": "Chemical product",
@@ -16,9 +31,35 @@
                 "art": {
                     "physical-form": "Physical form",
                     "vp": "Vapour pressure",
-                    "mole-fraction": "Mole fraction",
+                    "mole-conc": "Mole concentration",
+                    "weight-conc": "Weight concentration",
                     "activity-coef": "Activity coefficient",
-                    "activity-class": "Activity class"
+                    "activity-class": "Activity class",
+                    "dustiness": "Dustiness",
+                    "lc": "Local controls"
+                }
+            },
+            "options": {
+                "art": {
+                    "powder": "Powders, granules or pelletized material",
+                    "liquid": "Liquid",
+                    "solid": "Solid objects",
+                    "efine": "Extremely fine dust",
+                    "fine": "Fine dust",
+                    "coarse": "Coarse dust",
+                    "gran": "Granules, flakes or pellets",
+                    "fgran": "Firm granules, flakes or pellets",
+                    "no-lc": "No local controls",
+                    "suppression": "Suppression",
+                    "containment": "Containment",
+                    "lev-receiving": "Local Exhaust Ventilation (LEV) - receiving",
+                    "knockdown": "Knockdown suppression",
+                    "wetting": "Wetting at the point of release",
+                    "c-low": "Low level containment",
+                    "c-med": "Medium level containment",
+                    "c-high": "High level containment",
+                    "canopy": "Canopy hood",
+                    "other-receiving": "Other receiving hoods"
                 }
             }
         }
