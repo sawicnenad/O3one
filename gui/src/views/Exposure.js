@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Overview from '../components/exposure/Overview';
-import ExposureSituation from '../components/exposure/ExposureSituation';
 
 /*
     Exposure view
@@ -22,9 +21,8 @@ import ExposureSituation from '../components/exposure/ExposureSituation';
 function Exposure() {
     const { t } = useTranslation();
     return(
-        <div className="content">
+        <div>
             <Overview />
-            
         </div>
     )
 }

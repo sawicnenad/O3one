@@ -3,14 +3,33 @@
         {
             "id": 1,
             "name": "Exposure situation - transfer of liquids in department 1A",
-            "substance": {
+            "created": "27.12.2020",
+            "modified": "27.12.2020",
+            "chemical": {
                 "id": 1,
-                "name": "Substance 1"
+                "name": "Substance 1",
+                "toxvalue": 0.1
             },
-            "art": true,
-            "sm": false,
-            "tra": false,
-            "o3": true
+            "art": {
+                "status": "calculated",
+                "exposure": 3.21
+            },
+            "sm": {
+                "status": "calculated",
+                "exposure": 1.1
+            },
+            "tra": {
+                "status": "none"
+            },
+            "o3": {
+                "status": "none"
+            }
         }
-    ]
+    ],
+
+    "settings": {
+        "exposure": {
+            "preferredModel": "art"
+        }
+    }
 }

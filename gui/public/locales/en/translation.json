@@ -1,4 +1,7 @@
 {
+    "create-new": "Create new",
+    "settings": "Settings",
+    "open": "Open",
     "save": "Save",
     "cancel": "Cancel",
     "substance": "Substance",
@@ -9,9 +12,15 @@
     "department": "Department",
     "workplace": "Workplace",
     "unspecified": "Unspecified",
+    "unknown": "Unknown",
     "exposure-models": "Exposure models",
+    "exposure-situations": "Exposure situations",
     "messages": {
         "required": "Must not be empty"
+    },
+    "nav": {
+        "home": "Home",
+        "exposure": "Exposure"
     },
     "models": {
         "art": "Advanced REACH Tool",
@@ -20,6 +29,20 @@
         "o3-description": "O3 employs a machine learning technique - constantly trained on evidence data - to predict the exposure"
     },
     "exposure": {
+        "risk": {
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low"
+        },
+        "overview": {
+            "name": "Name",
+            "created": "Created",
+            "modified": "Last modified",
+            "chemical": "Chemical",
+            "exposure": "Exposure",
+            "risk": "Risk",
+            "action": "Action"
+        },
         "es": {
             "new-es": "New exposure situation",
             "general": "General",
