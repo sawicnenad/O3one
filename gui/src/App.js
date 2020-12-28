@@ -20,7 +20,7 @@ function App() {
                     
                     <Content style={{ minHeight: "90vh" }}>
                         <Switch>
-                            <Route path="/exposure" component={Exposure} />
+                            <Route path="/exposure/$" component={Exposure} />
                         </Switch>
                     </Content>
                 </Layout>

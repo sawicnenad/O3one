@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Route, Switch } from 'react-router-dom';
 import Overview from '../components/exposure/Overview';
 
 /*
@@ -18,11 +19,15 @@ import Overview from '../components/exposure/Overview';
     * Controls
     * Results - calculated exposure, risk (if substance selected), graph...
 */
-function Exposure() {
+function Exposure(props) {
     const { t } = useTranslation();
+
+    console.log(props)
+
+    const url = props.location.pathname;
     return(
         <div>
-            <Overview />
+            <Route path={`${location}`} />
         </div>
     )
 }

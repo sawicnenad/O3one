@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Space, Table, Tag, Button, Row, Col } from 'antd';
 import {
     DeleteOutlined,
-    PlusOutlined,
-    SettingOutlined
+    PlusOutlined
 } from '@ant-design/icons';
 
 
@@ -77,24 +76,19 @@ function Overview() {
     )
 
     return(
-        <div className="content">
+        <div>
             <Row>
                 <Col md={{ span: 12 }}>
                     <h1 className="my-page-title">{t('exposure-situations')}</h1>
                 </Col>
                 <Col md={{ span: 12 }} style={{ textAlign: "right" }}>
-                    <Space>
-                        <Button type="default" shape="round" size="large">
-                            <SettingOutlined /> {t('settings')}
-                        </Button>
-                        <Button
-                            type="primary" 
-                            shape="round" size="large"
-                            className="success-button"
-                        >
-                            <PlusOutlined /> {t('create-new')}
-                        </Button>
-                    </Space>
+                    <Button
+                        type="primary" 
+                        shape="round" size="large"
+                        className="success-button"
+                    >
+                        <PlusOutlined /> {t('create-new')}
+                    </Button>
                 </Col>
             </Row>
             
