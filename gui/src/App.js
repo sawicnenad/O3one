@@ -14,7 +14,7 @@ function App() {
             <BrowserRouter>
 
                 <Layout>
-                    <Header>
+                    <Header style={{ background: "white" }}>
                         <Navigation />
                     </Header>
                     

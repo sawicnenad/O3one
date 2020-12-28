@@ -11,7 +11,7 @@ function Navigation() {
     const {t} = useTranslation();
     return(
         <div>
-            <Menu mode="horizontal" theme="dark">
+            <Menu mode="horizontal">
                 <Menu.Item key="home">
                     {t('nav.home')}
                 </Menu.Item>
