@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import ExposureSituation from '../components/exposure/ExposureSituation';
 import Overview from '../components/exposure/Overview';
 
 /*
@@ -19,15 +20,16 @@ import Overview from '../components/exposure/Overview';
     * Controls
     * Results - calculated exposure, risk (if substance selected), graph...
 */
-function Exposure(props) {
+function Exposure() {
     const { t } = useTranslation();
+    const { path } = useRouteMatch();
 
-    console.log(props)
-
-    const url = props.location.pathname;
     return(
         <div>
-            <Route path={`${location}`} />
+            <Switch>
+                <Route exact path={`${path}`} component={Overview} />
+                <Route path={`${path}/exposure-situation/:id`} component={ExposureSituation} />
+            </Switch>
         </div>
     )
 }

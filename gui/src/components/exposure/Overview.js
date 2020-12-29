@@ -5,6 +5,7 @@ import {
     DeleteOutlined,
     PlusOutlined
 } from '@ant-design/icons';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 
 /*
@@ -15,6 +16,7 @@ function Overview() {
     const { t } = useTranslation();
     const esData = require('../../json/sample.json').es;
     const settings = require('../../json/sample.json').settings;
+    const { url } = useRouteMatch();
 
 
     // Table data
@@ -82,13 +84,16 @@ function Overview() {
                     <h1 className="my-page-title">{t('exposure-situations')}</h1>
                 </Col>
                 <Col md={{ span: 12 }} style={{ textAlign: "right" }}>
-                    <Button
-                        type="primary" 
-                        shape="round" size="large"
-                        className="success-button"
-                    >
-                        <PlusOutlined /> {t('create-new')}
-                    </Button>
+                    <Link to={`${url}/exposure-situation`}>
+                        <Button
+                            type="primary" 
+                            shape="round" size="large"
+                            className="success-button"
+                        >
+                            <PlusOutlined /> {t('create-new')}
+                        
+                        </Button>
+                    </Link>
                 </Col>
             </Row>
             

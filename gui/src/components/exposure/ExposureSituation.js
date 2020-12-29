@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Checkbox, Divider, Collapse, Alert, Radio, Select, Button, Row, Col, Space, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { QuestionCircleOutlined } from '@ant-design/icons';
+import { Link, useParams } from 'react-router-dom';
 
 /*
     Create new or edit an existing exposure situation
@@ -14,6 +15,8 @@ import { QuestionCircleOutlined } from '@ant-design/icons';
 */
 function ExposureSituation() {
     const { t } = useTranslation();
+    const { params } = useParams();
+    console.log(params)
 
     const { Panel } = Collapse;
     const { Option } = Select;
@@ -29,17 +32,12 @@ function ExposureSituation() {
                 style={{ textAlign: 'right', marginBottom: 10 }}
             >
                 <Space>
-                    <Button
-                        type="default"
-                        danger
-                        shape="round"
-                    >
-                        {t('cancel')}
-                    </Button>
-                    <Button
-                        type="primary"
-                        shape="round"
-                    >
+                    <Link to='/exposure'>
+                        <Button type="default" danger shape="round">
+                            {t('cancel')}
+                        </Button>
+                    </Link>
+                    <Button type="primary" shape="round">
                         {t('save')}
                     </Button>
                 </Space>

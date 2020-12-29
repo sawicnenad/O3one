@@ -12,15 +12,19 @@ function App() {
     return(
         <Suspense fallback="loading">
             <BrowserRouter>
-
                 <Layout>
                     <Header style={{ background: "white" }}>
                         <Navigation />
                     </Header>
                     
-                    <Content style={{ minHeight: "90vh" }}>
+                    <Content 
+                        style={{ 
+                            minHeight: "90vh",
+                            padding: "25px 65px" 
+                        }}
+                    >
                         <Switch>
-                            <Route path="/exposure/$" component={Exposure} />
+                            <Route path={`/exposure`} component={Exposure} />
                         </Switch>
                     </Content>
                 </Layout>
