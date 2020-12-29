@@ -16,7 +16,8 @@
     "exposure-models": "Exposure models",
     "exposure-situations": "Exposure situations",
     "messages": {
-        "required": "Must not be empty"
+        "required": "field cannot be empty",
+        "too-short": "too short"
     },
     "nav": {
         "home": "Home",
@@ -54,7 +55,9 @@
             "reach-models": "REACH exposure models",
             "ozone-models": "O3one exposure models",
             "substance-or-product": "Chemical type",
-            "none": "None"
+            "none": "None",
+            "none-tooltip": "Generic exposure situation that is not related to any chemical",
+            "none-info": "The results will not include the risk evaluation (comparison of the exposure concentration with a corresponding toxicological value of substance)"
         },
         "assessment": {
             "var-groups": {

@@ -1,4 +1,11 @@
 
+@media only screen and (min-width: 1600px) {
+   .layout-wrapper {
+      width: 75%;
+      margin: auto;
+   }
+}
+
 .text-muted {
    color: #8c8c8c;
    letter-spacing: 1px;

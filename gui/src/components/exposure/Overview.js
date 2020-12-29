@@ -14,7 +14,10 @@ import { Link, useRouteMatch } from 'react-router-dom';
 */
 function Overview() {
     const { t } = useTranslation();
-    const esData = require('../../json/sample.json').es;
+
+    // for development mode: exposure situations stored in local storage
+    const fromLocalStorage = localStorage.getItem('es');
+    const esData = fromLocalStorage ? JSON.parse(fromLocalStorage) : [];
     const settings = require('../../json/sample.json').settings;
     const { url } = useRouteMatch();
 
@@ -62,16 +65,12 @@ function Overview() {
     // exposure only shows exposure calculated by preferred model
     // user defines this in settings
     const dataSource = esData.map(
-        es => ({
-            key: es.id,
+        (es, inx) => ({
+            key: inx,
             name: es.name,
             created: es.created,
             chemical: es.chemical ? es.chemical.name : t("unspecified"),
-            exposure: (
-                es[settings.exposure.preferredModel].status === "calculated"
-                ? es[settings.exposure.preferredModel].exposure
-                : <Tag color="orange">{t('unknown')}</Tag>
-            ),
+            exposure: <Tag color="orange">{t('unknown')}</Tag>,
             risk: <Tag color="magenta">{t('exposure.risk.high')}</Tag>,
             action: es.id
         })
@@ -84,14 +83,13 @@ function Overview() {
                     <h1 className="my-page-title">{t('exposure-situations')}</h1>
                 </Col>
                 <Col md={{ span: 12 }} style={{ textAlign: "right" }}>
-                    <Link to={`${url}/exposure-situation`}>
+                    <Link to={`${url}/exposure-situation/0`}>
                         <Button
                             type="primary" 
                             shape="round" size="large"
                             className="success-button"
                         >
                             <PlusOutlined /> {t('create-new')}
-                        
                         </Button>
                     </Link>
                 </Col>

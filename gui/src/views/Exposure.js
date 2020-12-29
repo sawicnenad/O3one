@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import ExposureSituation from '../components/exposure/ExposureSituation';
 import Overview from '../components/exposure/Overview';
@@ -21,7 +20,6 @@ import Overview from '../components/exposure/Overview';
     * Results - calculated exposure, risk (if substance selected), graph...
 */
 function Exposure() {
-    const { t } = useTranslation();
     const { path } = useRouteMatch();
 
     return(

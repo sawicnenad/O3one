@@ -12,7 +12,7 @@ function App() {
     return(
         <Suspense fallback="loading">
             <BrowserRouter>
-                <Layout>
+                <Layout className="layout-wrapper">
                     <Header style={{ background: "white" }}>
                         <Navigation />
                     </Header>
