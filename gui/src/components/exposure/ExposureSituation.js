@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
     Form,
     Input,
@@ -12,9 +12,11 @@ import {
     Row,
      Col,
     Space,
-    Tooltip } from 'antd';
+    Tooltip, 
+    Table,
+    Tag} from 'antd';
 import { useTranslation } from 'react-i18next';
-import { QuestionCircleOutlined, SaveOutlined } from '@ant-design/icons';
+import { EditOutlined, QuestionCircleOutlined, SaveOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 /*
@@ -30,6 +32,19 @@ function ExposureSituation(props) {
     const [ state, setState ] = useState({});
     const { t } = useTranslation();
     const esid = parseInt(props.match.params.id);
+    let es = {};
+    const [testForm] = Form.useForm();
+    if (esid !== 0) {
+        const data = JSON.parse(localStorage.getItem('es'));
+        es = data.find(o => o.id === esid);
+    }
+    console.log(es)
+    useEffect(() => {
+        
+        if (!es.chemtype) es.chemtype = "none"
+        testForm.setFieldsValue(es);
+    }, [])
+        
 
     // the fields of form are grouped in few collapse panels
     const { Panel } = Collapse;
@@ -39,28 +54,34 @@ function ExposureSituation(props) {
         wrapperCol: {md: { offset: 4, span: 16 }}
     }
 
+
+    
+    
     return(
         <div>
-            {esid === 0 ? <h1>{t('exposure.es.new-es')}</h1> : <div />}
+            <h1>{esid === 0 ? t('exposure.es.new-es') : es.name}</h1>
             <Form
+                form={testForm}
                 name="newSituationForm"
                 labelCol={{ md: { span: 4 }}}
                 wrapperCol={{ md: { span: 16 } }}
-                initialValues={{
-                    chemtype: "none"
-                }}
                 onFinish={values => {
+                    let es = values;
+                    es.id = Math.round(Math.random() * 100);
+                    let date = new Date( Date.now() );
+                    es.created = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
                     let fromLocalStorage = (localStorage.getItem('es') ? 
                         JSON.parse(localStorage.getItem('es')) : []);
-                    fromLocalStorage.push(values);
+                    fromLocalStorage.push(es);
                     fromLocalStorage = JSON.stringify(fromLocalStorage);
                     localStorage.setItem('es', fromLocalStorage);
                 }}
                 
                 onFinishFailed={
-                    ({ values, errorFields }) => (
-                        setState({...state, errors: errorFields, values: values}
-                    ))}
+                    ({ values, errorFields }) => {
+                        setState({...state, errors: errorFields, values: values})
+                        console.log(values)
+                }}
             >
                 <Form.Item 
                     key="buttons"
@@ -131,7 +152,7 @@ function ExposureSituation(props) {
                                         {t('date-created')}:
                                     </Col>
                                     <Col md={{ span: 16 }}>
-                                        {Date}
+                                        {es.created}
                                     </Col>
                                 </Row>
                                 <br/>
@@ -213,27 +234,68 @@ function ExposureSituation(props) {
                         </Row>
 
                         <Divider plain>{t('exposure.es.reach-models')}</Divider>
-                        <Form.Item name="art" {...tailLayout} valuePropName="checked">
-                            <Checkbox>{t('models.art')}</Checkbox>
-                        </Form.Item>
+                        {['art', 'stoffenmanager', 'ecetoc'].map(
+                            model => (
+                                <Row key={model} className="hover-effect" gutter={[16, 16]}>
+                                    <Col md={{ offset: 4, span: 8 }}>
+                                        <Space>
+                                            <div style={{ width: 150 }}>
+                                                {t(`models.${model}`)}
+                                            </div>
+                                            <Button type="link" shape="round">
+                                                <EditOutlined /> {t('edit')}
+                                            </Button>
+                                        </Space>
+                                    </Col>
 
-                        <Form.Item name="stoffenmanager" {...tailLayout} valuePropName="checked">
-                            <Checkbox>{t('models.stoffenmanager')}</Checkbox>
-                        </Form.Item>
+                                    <Col md={{ span: 6 }}>
+                                        <div className="div-text-middle">
+                                            {
+                                                es[model] ? 
+                                                es[model].exposure
+                                                : <Tag color="orange">{t('exposure.es.unknown-exposure')}</Tag>
+                                            }
+                                        </div>
+                                    </Col>
 
-                        <Form.Item name="ecetoc" {...tailLayout} valuePropName="checked">
-                            <Checkbox>{t('models.ecetoc')}</Checkbox>
-                        </Form.Item>
+                                    <Col md={{ span: 6 }}>
+                                        <div className="div-text-middle">
+                                            <Tag color="orange">{t('exposure.es.unknown-risk')}</Tag>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            )
+                        )}
 
                         <Divider plain>{t('exposure.es.ozone-models')}</Divider>
-
-                        <Form.Item name="o3" {...tailLayout} valuePropName="checked">
-                            <Checkbox><span>O<sub>3</sub> </span>
-                                <Tooltip title={t('models.o3-description')}>
-                                    <QuestionCircleOutlined style={{color:"#1890ff"}} />
-                                </Tooltip>
-                            </Checkbox>
-                        </Form.Item>
+                        <Row className="hover-effect" gutter={[16, 16]}>
+                            <Col md={{ offset: 4, span: 8 }}>
+                                <Space>
+                                    <Space style={{ width: 150 }}>
+                                        <span>O<sub>3</sub></span>
+                                        <Tooltip title={t('models.o3-description')}>
+                                            <QuestionCircleOutlined style={{color:"#1890ff"}} />
+                                        </Tooltip>
+                                    </Space>
+                                    <Button type="link" shape="round">
+                                        <EditOutlined /> {t('edit')}
+                                    </Button>
+                                </Space>
+                            </Col>
+                            <Col md={{ span: 6 }}>
+                                <div className="div-text-middle">
+                                    {
+                                        es.o3 ? es.o3.exposure
+                                        : <Tag color="orange">{t('exposure.es.unknown-exposure')}</Tag>
+                                    }
+                                </div>
+                            </Col>
+                            <Col md={{ span: 6 }}>
+                                <div className="div-text-middle">
+                                    <Tag color="orange">{t('exposure.es.unknown-risk')}</Tag>
+                                </div>
+                            </Col>
+                        </Row>
                     </Panel>
                 </Collapse>      
             </Form>

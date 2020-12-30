@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Space, Table, Tag, Button, Row, Col } from 'antd';
+import { Space, Table, Tag, Button, Row, Col, Popconfirm } from 'antd';
 import {
     DeleteOutlined,
     PlusOutlined
@@ -20,6 +20,16 @@ function Overview() {
     const esData = fromLocalStorage ? JSON.parse(fromLocalStorage) : [];
     const settings = require('../../json/sample.json').settings;
     const { url } = useRouteMatch();
+
+
+    // delete a situation
+    const handleSituationDelete = id => {
+        console.log(id)
+        console.log(esData)
+        let data = esData.filter(o => o.id !== id);
+        console.log(data)
+        localStorage.setItem('es', JSON.stringify(data));
+    }
 
 
     // Table data
@@ -51,12 +61,22 @@ function Overview() {
             key: "action",
             render: id => (
                 <Space>
-                    <Button type="primary" shape="round">
-                        {t('open')}
-                    </Button>
-                    <Button type="primary" danger shape="circle">
-                        <DeleteOutlined />
-                    </Button>
+                    <Link to={`${url}/exposure-situation/${id}`}>
+                        <Button type="primary" shape="round">
+                            {t('open')}
+                        </Button>
+                    </Link>
+                   
+                    <Popconfirm 
+                        title={t('messages.are-you-sure-to-delete')}
+                        onConfirm={() => handleSituationDelete(id)}
+                        okText={t('yes')}
+                        cancelText={t('no')}
+                    >
+                        <Button type="primary" shape="circle" danger>
+                            <DeleteOutlined />
+                        </Button>
+                    </Popconfirm>
                 </Space>
             )
         }
@@ -67,9 +87,10 @@ function Overview() {
     const dataSource = esData.map(
         (es, inx) => ({
             key: inx,
+            id: es.id,
             name: es.name,
             created: es.created,
-            chemical: es.chemical ? es.chemical.name : t("unspecified"),
+            chemical: es.chemical ? es.chemical.name : <Tag color="orange">{t('unspecified')}</Tag>,
             exposure: <Tag color="orange">{t('unknown')}</Tag>,
             risk: <Tag color="magenta">{t('exposure.risk.high')}</Tag>,
             action: es.id
