@@ -1,0 +1,352 @@
+[
+    {
+        "name": "state",
+        "group": "product",
+        "type": "radio",
+        "label": "exposure.fields.labels.sm.physical-form",
+        "visible": "default",
+        "options": [
+            {
+                "label": "exposure.fields.options.sm.liquid",
+                "value": "liquid"
+            }, {
+                "label": "exposure.fields.options.sm.solid",
+                "value": "solid"
+            }
+        ]
+    }, {
+        "name": "abrasion",
+        "group": "product",
+        "type": "checkbox",
+        "label": "exposure.fields.labels.sm.abrasion",
+        "props": {
+            "valuePropName": "checked"
+        },
+        "conditions": [
+            "data.state === 'solid'"
+        ]
+    }, {
+        "name": "material",
+        "group": "product",
+        "type": "radio",
+        "label": "exposure.fields.labels.sm.type-of-material",
+        "conditions": [
+            "data.state === 'solid'",
+            "data.abrasion === true"
+        ],
+        "options": [
+            {
+                "label": "exposure.fields.options.sm.wood",
+                "value": "wood"
+            }, {
+                "label": "exposure.fields.options.sm.stone",
+                "value": "stone"
+            }
+        ]
+    }, {
+        "name": "dustiness",
+        "group": "product",
+        "type": "select",
+        "conditions": [
+            "data.state === 'solid'",
+            "data.abrasion !== true"
+        ],
+        "label": "exposure.fields.labels.sm.dustiness",
+        "options": [
+            {
+                "label": "exposure.fields.options.sm.efine",
+                "value": "efine"
+            }, {
+                "label": "exposure.fields.options.sm.fine",
+                "value": "fine"
+            }, {
+                "label": "exposure.fields.options.sm.coarse",
+                "value": "coarse"
+            }, {
+                "label": "exposure.fields.options.sm.gran",
+                "value": "gran"
+            }, {
+                "label": "exposure.fields.options.sm.fgran",
+                "value": "fgran"
+            }
+        ]
+    }, {
+        "name": "vp",
+        "group": "product",
+        "type": "numeric",
+        "label": "exposure.fields.labels.sm.vp",
+        "unit": "Pa",
+        "conditions": [
+            "data.state === 'liquid'"
+        ],
+        "props": {
+            "max": 100000.0,
+            "min": 0.01
+        }
+    }, {
+        "name": "concentration",
+        "group": "product",
+        "type": "numeric",
+        "label": "exposure.fields.labels.sm.concentration",
+        "unit": "%",
+        "visible": "default",
+        "props": {
+            "max": 100,
+            "min": 0.01
+        }
+    }, {
+        "name": "nf",
+        "group": "activity",
+        "type": "checkbox",
+        "label": "exposure.fields.labels.sm.nf",
+        "props": {
+            "valuePropName": "checked"
+        },
+        "visible": "default"
+    }, {
+        "name": "ff1",
+        "group": "activity",
+        "type": "checkbox",
+        "label": "exposure.fields.labels.sm.ff1",
+        "props": {
+            "valuePropName": "checked"
+        },
+        "conditions": [
+            "data.nf === true"
+        ]
+    }, {
+        "name": "ff2",
+        "group": "activity",
+        "type": "checkbox",
+        "label": "exposure.fields.labels.sm.ff2",
+        "props": {
+            "valuePropName": "checked"
+        },
+        "conditions": [
+            "data.nf === true"
+        ]
+    }, {
+        "name": "handling-liquid",
+        "group": "activity",
+        "type": "select",
+        "conditions": [
+            "data.state === 'liquid'"
+        ],
+        "label": "exposure.fields.labels.sm.handling-liquids",
+        "options": [
+            {
+                "label": "exposure.fields.options.sm.hl-spraying2",
+                "value": "hl-spraying2"
+            }, {
+                "label": "exposure.fields.options.sm.hl-spraying1",
+                "value": "hl-spraying1"
+            }, {
+                "label": "exposure.fields.options.sm.hl-surfaces3",
+                "value": "hl-surfaces3"
+            }, {
+                "label": "exposure.fields.options.sm.hl-surfaces2",
+                "value": "hl-surfaces2"
+            }, {
+                "label": "exposure.fields.options.sm.hl-surfaces1",
+                "value": "hl-surfaces1"
+            }, {
+                "label": "exposure.fields.options.sm.hl-small",
+                "value": "hl-small"
+            }, {
+                "label": "exposure.fields.options.sm.hl-negligible",
+                "value": "hl-negligible"
+            }, {
+                "label": "exposure.fields.options.sm.hl-closed",
+                "value": "hl-closed"
+            }
+        ]
+    }, {
+        "name": "handling-solid",
+        "group": "activity",
+        "type": "select",
+        "conditions": [
+            "data.state === 'solid'",
+            "data.abrasion !== true"
+        ],
+        "label": "exposure.fields.labels.sm.handling-solids",
+        "options": [
+            {
+                "label": "exposure.fields.options.sm.hp-large2",
+                "value": "hp-large2"
+            }, {
+                "label": "exposure.fields.options.sm.hp-large1",
+                "value": "hp-large1"
+            }, {
+                "label": "exposure.fields.options.sm.hp-dispersion",
+                "value": "hp-dispersion"
+            }, {
+                "label": "exposure.fields.options.sm.hp-medium",
+                "value": "hp-medium"
+            }, {
+                "label": "exposure.fields.options.sm.hp-small",
+                "value": "hp-small"
+            }, {
+                "label": "exposure.fields.options.sm.hp-very-small",
+                "value": "hp-very-small"
+            }, {
+                "label": "exposure.fields.options.sm.hp-negligible",
+                "value": "hp-negligible"
+            }, {
+                "label": "exposure.fields.options.sm.hp-closed",
+                "value": "hp-closed"
+            }
+        ]
+    }, {
+        "name": "handling-wood",
+        "group": "activity",
+        "type": "select",
+        "conditions": [
+            "data.state === 'solid'",
+            "data.abrasion === true",
+            "data.material === 'wood'"
+        ],
+        "label": "exposure.fields.labels.sm.handling-wood",
+        "options": [
+            {
+                "label": "exposure.fields.options.sm.hw-sanding",
+                "value": "hw-sanding"
+            }, {
+                "label": "exposure.fields.options.sm.hw-mechanical-fine",
+                "value": "hw-mechanical-fine"
+            }, {
+                "label": "exposure.fields.options.sm.hw-mechanical-coarse",
+                "value": "hw-mechanical-coarse"
+            }, {
+                "label": "exposure.fields.options.sm.hw-manual-sanding",
+                "value": "hw-manual-sanding"
+            }, {
+                "label": "exposure.fields.options.sm.hw-low-mechanical",
+                "value": "hw-low-mechanical"
+            }, {
+                "label": "exposure.fields.options.sm.hw-manual",
+                "value": "hw-manual"
+            }
+        ]
+    }, {
+        "name": "handling-stone",
+        "group": "activity",
+        "type": "select",
+        "conditions": [
+            "data.state === 'solid'",
+            "data.abrasion === true",
+            "data.material === 'stone'"
+        ],
+        "label": "exposure.fields.labels.sm.handling-stone",
+        "options": [
+            {
+                "label": "exposure.fields.options.sm.hs-sanding",
+                "value": "hs-sanding"
+            }, {
+                "label": "exposure.fields.options.sm.hs-demolition",
+                "value": "hs-demolition"
+            }, {
+                "label": "exposure.fields.options.sm.hs-low-energy2",
+                "value": "hs-low-energy2"
+            }, {
+                "label": "exposure.fields.options.sm.hs-low-energy1",
+                "value": "hs-low-energy1"
+            }
+        ]
+    }, {
+        "name": "time",
+        "unit": "min",
+        "type": "numeric",
+        "group": "activity",
+        "label": "exposure.fields.labels.sm.time",
+        "visible": "default",
+        "props": {
+            "max": 480,
+            "min": 1
+        }
+    }, {
+        "name": "lc",
+        "group": "controls",
+        "type": "select",
+        "visible": "default",
+        "label": "exposure.fields.labels.sm.lc",
+        "options": [
+            {
+                "label": "exposure.fields.options.sm.no-lc",
+                "value": "no"
+            }, {
+                "label": "exposure.fields.options.sm.suppression",
+                "value": "supression"
+            }, {
+                "label": "exposure.fields.options.sm.lev",
+                "value": "lev"
+            }, {
+                "label": "exposure.fields.options.sm.containment",
+                "value": "containment"
+            }, {
+                "label": "exposure.fields.options.sm.containment-lev",
+                "value": "containment-lev"
+            }
+        ]
+    }, {
+        "name": "workplace",
+        "group": "controls",
+        "type": "select",
+        "visible": "default",
+        "label": "exposure.fields.labels.sm.workplace",
+        "options": [
+            {
+                "label": "exposure.fields.options.sm.indoors-small",
+                "value": "indoors-small"
+            }, {
+                "label": "exposure.fields.options.sm.indoors-medium",
+                "value": "indoors-medium"
+            }, {
+                "label": "exposure.fields.options.sm.indoors-large",
+                "value": "indoors-large"
+            }, {
+                "label": "exposure.fields.options.sm.outdoors",
+                "value": "outdoors"
+            }
+        ]
+    }, {
+        "name": "gv",
+        "group": "controls",
+        "type": "select",
+        "conditions": [
+            "data.workplace && data.workplace !== 'outdoors'"
+        ],
+        "label": "exposure.fields.labels.sm.gv",
+        "options": [
+            {
+                "label": "exposure.fields.options.sm.no-gv",
+                "value": "no-gv"
+            }, {
+                "label": "exposure.fields.options.sm.mechanical",
+                "value": "mechanical"
+            }, {
+                "label": "exposure.fields.options.sm.booth",
+                "value": "booth"
+            }
+        ]
+    }, {
+        "name": "separation",
+        "group": "controls",
+        "type": "select",
+        "conditions": [
+            "data.nf !== true"
+        ],
+        "label": "exposure.fields.labels.sm.separation",
+        "options": [
+            {
+                "label": "exposure.fields.options.sm.no-cabin",
+                "value": "no-cabin"
+            }, {
+                "label": "exposure.fields.options.sm.cabin",
+                "value": "cabin"
+            }, {
+                "label": "exposure.fields.options.sm.separated",
+                "value": "separated"
+            }
+        ]
+    }
+]

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { 
     Form,
     Input,
-    Checkbox,
     Divider,
     Collapse,
     Alert,
@@ -12,12 +11,16 @@ import {
     Row,
      Col,
     Space,
-    Tooltip, 
-    Table,
-    Tag} from 'antd';
+    Tooltip
+} from 'antd';
 import { useTranslation } from 'react-i18next';
-import { EditOutlined, QuestionCircleOutlined, SaveOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { 
+    DownOutlined,
+    EditOutlined,
+    QuestionCircleOutlined,
+    SaveOutlined 
+} from '@ant-design/icons';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 /*
     Create new or edit an existing exposure situation
@@ -31,9 +34,13 @@ import { Link } from 'react-router-dom';
 function ExposureSituation(props) {
     const [ state, setState ] = useState({});
     const { t } = useTranslation();
+    const { url } = useRouteMatch();
+
     const esid = parseInt(props.match.params.id);
     let es = {};
     const [testForm] = Form.useForm();
+
+
     if (esid !== 0) {
         const data = JSON.parse(localStorage.getItem('es'));
         es = data.find(o => o.id === esid);
@@ -55,8 +62,29 @@ function ExposureSituation(props) {
     }
 
 
+    // exposure assessment / exposure models / risk scaling
+    const scaling = {
+        model: {
+            xs: { span: 16},
+            sm: { span: 12},
+            lg: { offset: 4, span: 6}
+        }, 
+        exposure: {
+            xs: { span: 0},
+            sm: { span: 6},
+            lg: { span: 6}
+        },
+        more : {
+            xs: { span: 8},
+            sm: { span: 4},
+            lg: { span: 4}
+        }
+    }
+
     
-    
+
+
+
     return(
         <div>
             <h1>{esid === 0 ? t('exposure.es.new-es') : es.name}</h1>
@@ -222,12 +250,13 @@ function ExposureSituation(props) {
                         </Form.Item>
                     </Panel>
 
-                    <Panel key="models" header={t('exposure.es.exposure-models')}>
+                    <Panel key="models" header={t('exposure.es.exposure-risk-assessment')}>
                         <Row>
                             <Col {...tailLayout.wrapperCol}>
                                 <Alert 
                                     type="info"
-                                    message={t('exposure.es.models-info')}
+                                    message={t('exposure.es.exposure-models')}
+                                    description={t('exposure.es.models-info')}
                                     showIcon
                                 />
                             </Col>
@@ -235,65 +264,56 @@ function ExposureSituation(props) {
 
                         <Divider plain>{t('exposure.es.reach-models')}</Divider>
                         {['art', 'stoffenmanager', 'ecetoc'].map(
-                            model => (
-                                <Row key={model} className="hover-effect" gutter={[16, 16]}>
-                                    <Col md={{ offset: 4, span: 8 }}>
-                                        <Space>
-                                            <div style={{ width: 150 }}>
-                                                {t(`models.${model}`)}
-                                            </div>
-                                            <Button type="link" shape="round">
-                                                <EditOutlined /> {t('edit')}
-                                            </Button>
-                                        </Space>
-                                    </Col>
+                               model => (
+                                   <div key={model} style={{ marginTop: 15 }}>
+                                       <Row className="hover-effect">
+                                            <Col {...scaling.model}>
+                                                <Link to={`${url}/${model}`}>
+                                                    <Button type="link" style={{ borderLeft: "3px solid #1890ff" }}>
+                                                        <EditOutlined /> {t(`models.${model}`)}
+                                                    </Button>
+                                                </Link>
+                                            </Col>
 
-                                    <Col md={{ span: 6 }}>
-                                        <div className="div-text-middle">
-                                            {
-                                                es[model] ? 
-                                                es[model].exposure
-                                                : <Tag color="orange">{t('exposure.es.unknown-exposure')}</Tag>
-                                            }
-                                        </div>
-                                    </Col>
+                                            <Col {...scaling.exposure}>
+                                                <Space align="center">
+                                                    exposure / risk
+                                                </Space>
+                                            </Col>
 
-                                    <Col md={{ span: 6 }}>
-                                        <div className="div-text-middle">
-                                            <Tag color="orange">{t('exposure.es.unknown-risk')}</Tag>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            )
+                                            <Col {...scaling.more} style={{ textAlign: "right" }}>
+                                                <Button type="link">
+                                                    <DownOutlined /> {t('more')}
+                                                </Button>
+                                            </Col>
+                                       </Row>
+                                   </div>
+                               ) 
                         )}
+                        
 
                         <Divider plain>{t('exposure.es.ozone-models')}</Divider>
-                        <Row className="hover-effect" gutter={[16, 16]}>
-                            <Col md={{ offset: 4, span: 8 }}>
-                                <Space>
-                                    <Space style={{ width: 150 }}>
+                        <Row className="hover-effect">
+                            <Col {...scaling.model}>
+                                <Button type="link" style={{ borderLeft: "3px solid #1890ff" }}>
+                                    <Space align="center">
+                                        <EditOutlined />
                                         <span>O<sub>3</sub></span>
                                         <Tooltip title={t('models.o3-description')}>
-                                            <QuestionCircleOutlined style={{color:"#1890ff"}} />
+                                            <QuestionCircleOutlined />
                                         </Tooltip>
                                     </Space>
-                                    <Button type="link" shape="round">
-                                        <EditOutlined /> {t('edit')}
-                                    </Button>
+                                </Button>
+                            </Col>
+                            <Col {...scaling.exposure}>
+                                <Space align="center">
+                                    exposure / risk
                                 </Space>
                             </Col>
-                            <Col md={{ span: 6 }}>
-                                <div className="div-text-middle">
-                                    {
-                                        es.o3 ? es.o3.exposure
-                                        : <Tag color="orange">{t('exposure.es.unknown-exposure')}</Tag>
-                                    }
-                                </div>
-                            </Col>
-                            <Col md={{ span: 6 }}>
-                                <div className="div-text-middle">
-                                    <Tag color="orange">{t('exposure.es.unknown-risk')}</Tag>
-                                </div>
+                            <Col {...scaling.more} style={{ textAlign: "right" }}>
+                                <Button type="link">
+                                    <DownOutlined /> {t('more')}
+                                </Button>
                             </Col>
                         </Row>
                     </Panel>

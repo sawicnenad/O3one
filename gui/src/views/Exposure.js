@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import Assessment from '../components/exposure/Assessment';
 import ExposureSituation from '../components/exposure/ExposureSituation';
 import Overview from '../components/exposure/Overview';
 
@@ -26,7 +27,8 @@ function Exposure() {
         <div>
             <Switch>
                 <Route exact path={`${path}`} component={Overview} />
-                <Route path={`${path}/exposure-situation/:id`} component={ExposureSituation} />
+                <Route exact path={`${path}/exposure-situation/:id`} component={ExposureSituation} />
+                <Route exact path={`${path}/exposure-situation/:id/:model`} component={Assessment} />
             </Switch>
         </div>
     )

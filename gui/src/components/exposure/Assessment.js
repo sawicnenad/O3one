@@ -1,7 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Alert, Collapse, Form, Input, InputNumber, Select } from 'antd';
-import { useTranslation } from 'react-i18next';
 
+import React, { useEffect, useState } from 'react';
+import {
+    Alert,
+    Button,
+    Collapse,
+    Form,
+    Input,
+    InputNumber,
+    Radio,
+    Select,
+    Space 
+} from 'antd';
+import { useTranslation } from 'react-i18next';
+import { CalculatorOutlined, SaveOutlined } from '@ant-design/icons';
+import Checkbox from 'antd/lib/checkbox/Checkbox';
 
 
 /*
@@ -16,9 +28,12 @@ import { useTranslation } from 'react-i18next';
 function Assessment() {
 
     // data is in format {field: value}
+    const [ state, setState ] = useState({});
     const [ data, setData ] = useState({});
     const [ visibility, setVisibility ] = useState([]);
     const { t } = useTranslation();
+    const model = 'stoffenmanager';
+    const myjson = require(`../../json/exposure/${model}.json`);
 
 
     const { Option, OptGroup } = Select;
@@ -33,7 +48,6 @@ function Assessment() {
     useEffect(() => {
         // initially default fields must be displayed
         // those with visible: default in JSON
-        const myjson = require('../../json/exposure/art.json');
         let initial = myjson.map(
             field => field.visible === 'default' ? field.name : null
         )
@@ -70,6 +84,7 @@ function Assessment() {
     // elegant way to do it is using switch 
     // fields are split into several panels (of collapse - antd component)
     const OneField = (item) => {
+        let options = item.options;
 
         switch(item.type) {
             // select and select fields with a list of options defined by value of another field
@@ -78,7 +93,6 @@ function Assessment() {
             case "select":
                 
                 const link = item.link;      // get value of the linked field
-                let options = item.options;
 
                 if (link) {
                     const linkVal = data[link];  // using it, we filter options 
@@ -131,12 +145,35 @@ function Assessment() {
             
             // input but accepting numbers only
             case "numeric":
+                /*parser={item.unit ? value => value.replace(item.unit, ''): false}
+                        formatter={item.unit ? value => `${value}${item.unit}`: false}*/
                 return (
-                    <InputNumber
-                        {...item.props}
-                        parser={item.unit ? value => value.replace(item.unit, ''): false}
-                        formatter={item.unit ? value => `${value}${item.unit}`: false}
-                    />
+                    <Space align="center">
+                        <InputNumber {...item.props}/>
+                        <span style={{ color: "#595959"}}>
+                            {item.unit}
+                        </span>
+                    </Space>
+                )
+            // radio buttons
+            case "radio":
+                return(
+                    <Radio.Group>
+                        {
+                            options.map(
+                                option => (
+                                    <Radio key={option.value} value={option.value}>
+                                        {t(option.label)}
+                                    </Radio>
+                                )
+                            )
+                        }
+                    </Radio.Group>
+                )
+            // checkbox
+            case "checkbox":
+                return(
+                    <Checkbox>{t(item.label)}</Checkbox>
                 )
             // default is simple textual input
             default:
@@ -150,14 +187,21 @@ function Assessment() {
 
 
 
-
-
-
-
     // panels of collaps
     // this is what is used for REACH models: ART, Stoffenmanager and ECETOC TRA
     // but may differ for others (e.g. if physical-chemical are considered)
     const panels = ['product', 'activity', 'controls', 'results'];
+
+
+    // important to set checkbox values to false on initial state
+    // otherwise on submit validation error
+    const initialValues = {};
+    for (let i = 0; i < myjson.length; i++) {
+        if (myjson[i].type === 'checkbox') {
+            initialValues[ myjson[i].name ] = false;
+        }
+    }
+
 
     return(
         <div>
@@ -165,23 +209,63 @@ function Assessment() {
                 onValuesChange={(_, values) => setData(values)}
                 labelCol={{ md: {span: 4} }}
                 wrapperCol={{ md: {span: 16} }}
+                onFinish={values => console.log(values)}
+                initialValues={initialValues}
+                scrollToFirstError
+                onFinishFailed={() => setState({ failedToSubmit: true })}
             >
+                <Form.Item
+                    key="controls"
+                    style={{ textAlign: "right" }}
+                    wrapperCol={{ span: 24 }}
+                >
+                    <Space>
+                        <Button 
+                            shape="round" size="large"
+                            onClick={() => console.log("cancel")}
+                        >
+                            {t('cancel')}
+                        </Button>
+                        <Button 
+                            type="primary" className="success-button"
+                            shape="round" size="large" htmlType="submit"
+                            onClick={() => console.log("save")}
+                        >
+                            <SaveOutlined /> {t('save')}
+                        </Button>
+                    </Space>
+                </Form.Item>
+
                 <Collapse
-                    defaultActiveKey="product"
+                    defaultActiveKey={['product', 'activity', 'controls']}
                 >{ 
                     panels.map(
                         panel => (
                             <Panel
                                 key={panel}
-                                header={ t(`exposure.assessment.var-groups.${panel}`) }
+                                header={ <Space>
+                                    { panel === 'results' ? <CalculatorOutlined /> : '' }
+                                    <span>{ t(`exposure.assessment.var-groups.${panel}`) }</span>
+                                </Space>}
                             >
-                                {require('../../json/exposure/art.json').map(
+                                {require(`../../json/exposure/${model}.json`).map(
                                     item => (
                                         item.group === panel && visibility.includes(item.name) ?
                                         <Form.Item
                                             key={item.name}
                                             name={item.name}
-                                            label={t(item.label)}
+                                            label={item.type === 'checkbox' ? "" : t(item.label)}
+                                            wrapperCol={
+                                                item.type === 'checkbox' ? 
+                                                    { md: { offset: 4 } } : ''
+                                                }
+                                            {...item.props}
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: t('messages.required-general')
+                                                }
+                                            ]}
                                         >{ OneField(item) }
                                         </Form.Item> : ""
                                     )
