@@ -58,7 +58,7 @@
             "name": "Name",
             "description": "Description",
             "exposure-models": "Exposure models",
-            "models-info": "At least one exposure model should be configured for the exposure assessment. The required input parameters of a model are accessed using 'edit' button.",
+            "models-info": "At least one exposure model should be configured for the exposure assessment. Click on a given model to access its input parameters.",
             "reach-models": "REACH exposure models",
             "ozone-models": "O3one exposure models",
             "substance-or-product": "Chemical type",
@@ -73,7 +73,7 @@
                 "product": "Chemical product",
                 "activity": "Activity task",
                 "controls": "Exposure controls",
-                "results": "Calculated exposure"
+                "results": "Assessed exposure results"
             },
             "alerts": {
                 "field-no-option": "Please check if you have provided values for all fields above"
@@ -110,6 +110,19 @@
                     "workplace": "Workplace",
                     "gv": "General ventilation",
                     "separation": "Separation of the employee"
+                }, 
+                "ecetoc": {
+                    "physical-form": "Physical state",
+                    "vp": "Vapour pressure",
+                    "concentration": "Concentration",
+                    "mw": "Molecular weight",
+                    "dustiness": "Dustiness",
+                    "proc": "Process category (PROC)",
+                    "su": "Type of settings",
+                    "time": "Task duration",
+                    "ventilation": "Ventilation",
+                    "rpe": "RPE",
+                    "rpe-info": "Respiratory protective equipment (RPE)"
                 }
             },
             "options": {
@@ -185,6 +198,59 @@
                     "no-cabin": "The worker does not work in a cabin",
                     "cabin": "The worker works in a cabin without a specific ventilation",
                     "separated": "The worker is in a separated (control) room with independent air supply"
+                },
+                "ecetoc": {
+                    "solid": "Solid",
+                    "liquid": "Liquid",
+                    "c-high": "> 25 %",
+                    "c-medium": "5 - 25 %",
+                    "c-low": "1 - 5 %",
+                    "c-very-low": "< 1 %",
+                    "high-dust": "High",
+                    "medium-dust": "Medium",
+                    "low-dust": "Low",
+                    "industrial": "Industrial",
+                    "professional": "Professional",
+                    "proc1": "PROC1: Chemical production or refinery in closed process without likelihood of exposure or processes with equivalent containment conditions",
+                    "proc2": "PROC2: Chemical production or refinery in closed continuous process with occasional controlled exposure or processes with equivalent containment conditions",
+                    "proc3": "PROC3: Manufacture or formulation in the chemical industry in closed batch processes with occasional controlled exposure or processes with equivalent containment condition",
+                    "proc4": "PROC4: Chemical production where opportunity for exposure arises",
+                    "proc5": "PROC5: Mixing or blending in batch processes",
+                    "proc6": "PROC6: Calendaring operations",
+                    "proc7": "PROC7: Industrial spraying",
+                    "proc8a": "PROC8a: Transfer of substance or mixture (charging and discharging) at non-dedicated facilities",
+                    "proc8b": "PROC8b: Transfer of substance or mixture (charging and discharging) at dedicated facilities",
+                    "proc9": "PROC9: Transfer of substance or mixture into small containers (dedicated filling line, including weighing)",
+                    "proc10": "PROC10: Roller application or brushing",
+                    "proc11": "PROC11: Non industrial spraying",
+                    "proc12": "PROC12: Use of blowing agents in manufacture of foam",
+                    "proc13": "PROC13: Treatment of articles by dipping and pouring",
+                    "proc14": "PROC14: Tableting, compression, extrusion, pelletization, granulation",
+                    "proc15": "PROC15: Use as laboratory reagent",
+                    "proc16": "PROC16: Use of fuels",
+                    "proc17": "PROC17: Lubrication at high energy conditions in metal working operations",
+                    "proc18": "PROC18: General greasing /lubrication at high kinetic energy conditions",
+                    "proc19": "PROC19: Manual activities involving hand contact",
+                    "proc20": "PROC20: Use of functional fluids in small devices",
+                    "proc21": "PROC21: Low energy manipulation and handling of substances bound in/on materials or articles",
+                    "proc22": "PROC22: Manufacturing and processing of minerals and/or metals at substantially elevated temperature",
+                    "proc23": "PROC23: Open processing and transfer operations at substantially elevated temperature",
+                    "proc24": "PROC24: High (mechanical) energy work-up of substances bound in /on materials and/or articles",
+                    "proc25": "PROC25: Other hot work operations with metals",
+                    "full-shift": "> 4h",
+                    "long-time": "1 - 4h",
+                    "medium-time": "15min - 1h",
+                    "short-time": "< 15min",
+                    "indoors": "Indoors",
+                    "outdoors": "Outdoors",
+                    "gv": "Indoors with good general ventilation",
+                    "lev": "Indoors with local exhaust ventilation (LEV)",
+                    "gv-lev": "Indoors with good general ventilation and LEV",
+                    "egv": "Indoors with enhanced general ventilation",
+                    "egv-lev": "Indoors with enhanced general ventilation and LEV",
+                    "no-rpe": "No RPE",
+                    "rpe90": "90% efficiency",
+                    "rpe95": "95% efficiency"
                 }
             }
         }

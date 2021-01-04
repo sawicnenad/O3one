@@ -1,0 +1,326 @@
+[
+    {
+        "name": "state",
+        "group": "product",
+        "type": "radio",
+        "label": "exposure.fields.labels.ecetoc.physical-form",
+        "visible": "default",
+        "options": [
+            {
+                "label": "exposure.fields.options.ecetoc.liquid",
+                "value": "liquid"
+            }, {
+                "label": "exposure.fields.options.ecetoc.solid",
+                "value": "solid"
+            }
+        ]
+    }, {
+        "name": "vp",
+        "group": "product",
+        "type": "numeric",
+        "label": "exposure.fields.labels.ecetoc.vp",
+        "unit": "Pa",
+        "conditions": [
+            "data.state === 'liquid'"
+        ],
+        "props": {
+            "max": 30000,
+            "min": 0.01
+        }
+    }, {
+        "name": "concentration",
+        "group": "product",
+        "type": "radio",
+        "label": "exposure.fields.labels.ecetoc.concentration",
+        "visible": "default",
+        "options": [
+            {
+                "label": "exposure.fields.options.ecetoc.c-very-low",
+                "value": "<1%"
+            }, {
+                "label": "exposure.fields.options.ecetoc.c-low",
+                "value": "1-5%"
+            }, {
+                "label": "exposure.fields.options.ecetoc.c-medium",
+                "value": "5-25%"
+            }, {
+                "label": "exposure.fields.options.ecetoc.c-high",
+                "value": ">25%"
+            }
+        ]
+    }, {
+        "name": "mw",
+        "group": "product",
+        "type": "numeric",
+        "label": "exposure.fields.labels.ecetoc.mw",
+        "unit": "g/mol",
+        "conditions": [
+            "data.state === 'liquid'"
+        ],
+        "props": {
+            "max": 100000,
+            "min": 1
+        }
+    }, {
+        "name": "dustiness",
+        "group": "product",
+        "type": "radio",
+        "conditions": [
+            "data.state === 'solid'"
+        ],
+        "label": "exposure.fields.labels.ecetoc.dustiness",
+        "options": [
+            {
+                "label": "exposure.fields.options.ecetoc.low-dust",
+                "value": "low"
+            }, {
+                "label": "exposure.fields.options.ecetoc.medium-dust",
+                "value": "medium"
+            }, {
+                "label": "exposure.fields.options.ecetoc.high-dust",
+                "value": "high"
+            }
+        ]
+    }, {
+        "name": "proc",
+        "group": "activity",
+        "type": "select",
+        "label": "exposure.fields.labels.ecetoc.proc",
+        "link": "state",
+        "visible": "default",
+        "options": {
+            "liquid": [
+                {
+                    "label": "exposure.fields.options.ecetoc.proc1",
+                    "value": "proc1"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc2",
+                    "value": "proc2"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc3",
+                    "value": "proc3"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc4",
+                    "value": "proc4"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc5",
+                    "value": "proc5"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc6",
+                    "value": "proc6"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc7",
+                    "value": "proc7"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc8a",
+                    "value": "proc8a"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc8b",
+                    "value": "proc8b"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc9",
+                    "value": "proc9"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc10",
+                    "value": "proc10"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc11",
+                    "value": "proc11"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc12",
+                    "value": "proc12"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc13",
+                    "value": "proc13"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc14",
+                    "value": "proc14"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc15",
+                    "value": "proc15"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc16",
+                    "value": "proc16"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc17",
+                    "value": "proc17"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc18",
+                    "value": "proc18"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc19",
+                    "value": "proc19"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc20",
+                    "value": "proc20"
+                }
+            ],
+            "solid": [
+                {
+                    "label": "exposure.fields.options.ecetoc.proc1",
+                    "value": "proc1"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc2",
+                    "value": "proc2"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc3",
+                    "value": "proc3"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc4",
+                    "value": "proc4"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc5",
+                    "value": "proc5"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc6",
+                    "value": "proc6"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc7",
+                    "value": "proc7"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc8a",
+                    "value": "proc8a"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc8b",
+                    "value": "proc8b"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc9",
+                    "value": "proc9"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc10",
+                    "value": "proc10"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc11",
+                    "value": "proc11"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc12",
+                    "value": "proc12"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc13",
+                    "value": "proc13"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc14",
+                    "value": "proc14"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc15",
+                    "value": "proc15"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc16",
+                    "value": "proc16"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc17",
+                    "value": "proc17"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc18",
+                    "value": "proc18"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc19",
+                    "value": "proc19"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc20",
+                    "value": "proc20"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc21",
+                    "value": "proc21"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc22",
+                    "value": "proc22"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc23",
+                    "value": "proc23"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc24",
+                    "value": "proc24"
+                }, {
+                    "label": "exposure.fields.options.ecetoc.proc25",
+                    "value": "proc25"
+                }
+            ]
+        }
+    }, {
+        "name": "su",
+        "group": "activity",
+        "type": "radio",
+        "label": "exposure.fields.labels.ecetoc.su",
+        "visible": "default",
+        "options": [
+            {
+                "label": "exposure.fields.options.ecetoc.industrial",
+                "value": "industrial"
+            }, {
+                "label": "exposure.fields.options.ecetoc.professional",
+                "value": "professional"
+            }
+        ]
+    }, {
+        "name": "time",
+        "group": "activity",
+        "type": "radio",
+        "label": "exposure.fields.labels.ecetoc.su",
+        "visible": "default",
+        "options": [
+            {
+                "label": "exposure.fields.options.ecetoc.short-time",
+                "value": "<15min"
+            }, {
+                "label": "exposure.fields.options.ecetoc.medium-time",
+                "value": "15min-1h"
+            }, {
+                "label": "exposure.fields.options.ecetoc.long-time",
+                "value": "1-4h"
+            }, {
+                "label": "exposure.fields.options.ecetoc.full-shift",
+                "value": ">4h"
+            }
+        ]
+    }, {
+        "name": "ventilation",
+        "group": "controls",
+        "type": "select",
+        "label": "exposure.fields.labels.ecetoc.ventilation",
+        "visible": "default",
+        "options": [
+            {
+                "label": "exposure.fields.options.ecetoc.outdoors",
+                "value": "outdoors"
+            }, {
+                "label": "exposure.fields.options.ecetoc.indoors",
+                "value": "indoors"
+            }, {
+                "label": "exposure.fields.options.ecetoc.gv",
+                "value": "gv"
+            }, {
+                "label": "exposure.fields.options.ecetoc.lev",
+                "value": "lev"
+            }, {
+                "label": "exposure.fields.options.ecetoc.gv-lev",
+                "value": "gv-lev"
+            }, {
+                "label": "exposure.fields.options.ecetoc.egv",
+                "value": "egv"
+            }, {
+                "label": "exposure.fields.options.ecetoc.egv-lev",
+                "value": "egv-lev"
+            }
+        ]
+    }, {
+        "name": "rpe",
+        "group": "controls",
+        "type": "select",
+        "label": "exposure.fields.labels.ecetoc.rpe",
+        "visible": "default",
+        "info": "info-rpe",
+        "options": [
+            {
+                "label": "exposure.fields.options.ecetoc.no-rpe",
+                "value": "no"
+            }, {
+                "label": "exposure.fields.options.ecetoc.rpe90",
+                "value": "rpe90"
+            }, {
+                "label": "exposure.fields.options.ecetoc.rpe95",
+                "value": "rpe95"
+            }
+        ]
+    }
+]

@@ -12,7 +12,7 @@ import {
     Space 
 } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { CalculatorOutlined, SaveOutlined } from '@ant-design/icons';
+import { SaveOutlined } from '@ant-design/icons';
 import Checkbox from 'antd/lib/checkbox/Checkbox';
 
 
@@ -32,7 +32,7 @@ function Assessment() {
     const [ data, setData ] = useState({});
     const [ visibility, setVisibility ] = useState([]);
     const { t } = useTranslation();
-    const model = 'stoffenmanager';
+    const model = 'ecetoc';
     const myjson = require(`../../json/exposure/${model}.json`);
 
 
@@ -162,9 +162,9 @@ function Assessment() {
                         {
                             options.map(
                                 option => (
-                                    <Radio key={option.value} value={option.value}>
+                                    <Radio.Button key={option.value} value={option.value}>
                                         {t(option.label)}
-                                    </Radio>
+                                    </Radio.Button>
                                 )
                             )
                         }
@@ -237,16 +237,15 @@ function Assessment() {
                 </Form.Item>
 
                 <Collapse
-                    defaultActiveKey={['product', 'activity', 'controls']}
+                    defaultActiveKey={['product']}
+                    accordion
                 >{ 
                     panels.map(
                         panel => (
                             <Panel
                                 key={panel}
-                                header={ <Space>
-                                    { panel === 'results' ? <CalculatorOutlined /> : '' }
-                                    <span>{ t(`exposure.assessment.var-groups.${panel}`) }</span>
-                                </Space>}
+                                header={t(`exposure.assessment.var-groups.${panel}`)}
+                                forceRender={true}
                             >
                                 {require(`../../json/exposure/${model}.json`).map(
                                     item => (
@@ -254,7 +253,9 @@ function Assessment() {
                                         <Form.Item
                                             key={item.name}
                                             name={item.name}
-                                            label={item.type === 'checkbox' ? "" : t(item.label)}
+                                            label={
+                                                item.type === 'checkbox' ? "" : t(item.label)
+                                            }
                                             wrapperCol={
                                                 item.type === 'checkbox' ? 
                                                     { md: { offset: 4 } } : ''
