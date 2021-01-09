@@ -77,6 +77,13 @@
             },
             "alerts": {
                 "field-no-option": "Please check if you have provided values for all fields above"
+            },
+            "results": {
+                "tabs": {
+                    "basic": "Basic",
+                    "regulatory": "Regulatory",
+                    "scientific": "Scientific"
+                }
             }
         },
         "fields": {
@@ -89,7 +96,13 @@
                     "activity-coef": "Activity coefficient",
                     "activity-class": "Activity class",
                     "dustiness": "Dustiness",
-                    "lc": "Local controls"
+                    "nf": "Source distance 1m or less from worker's breathing zone (nose and mouth)",
+                    "lc": "Local controls",
+                    "site": "Exposure site",
+                    "ventilation": "Ventilation rate",
+                    "volume": "Workplace volume",
+                    "building": "Exposure source distanced far from building",
+                    "ff-distance": "Worker distanced more than 4 meters from far-field source"
                 },
                 "sm": {
                     "physical-form": "Physical state",
@@ -145,7 +158,28 @@
                     "c-med": "Medium level containment",
                     "c-high": "High level containment",
                     "canopy": "Canopy hood",
-                    "other-receiving": "Other receiving hoods"
+                    "other-receiving": "Other receiving hoods",
+                    "indoors": "Indoors",
+                    "outdoors": "Outdoors",
+                    "spray-room": "Spray room",
+                    "flow-booth": "Downward laminar flow booth",
+                    "no-restrictions": "No restrictions on general ventilation",
+                    "natural": "Only good natural ventilation",
+                    "mechanical": "Mechanical ventilation giving at least 1 ACH",
+                    "specialized": "Specialized room ventilation with more than 10 ACH",
+                    "ach-0-3": "0.3 ACH",
+                    "ach-1": "1 ACH",
+                    "ach-3": "3 ACH",
+                    "ach-10": "10 ACH",
+                    "ach-30": "30 ACH",
+                    "any-room": "Any size workroom",
+                    "small-room": "Small workrooms only",
+                    "large-room": "Large workrooms only",
+                    "vol-30": "30 m3",
+                    "vol-100": "100 m3",
+                    "vol-300": "300 m3",
+                    "vol-1000": "1000 m3",
+                    "vol-3000": "3000 m3"
                 }, 
                 "sm": {
                     "liquid": "Liquid",

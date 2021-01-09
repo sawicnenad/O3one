@@ -96,6 +96,12 @@
             "min": 0.0001
         }
     }, {
+        "name": "nf",
+        "group": "activity",
+        "type": "checkbox",
+        "visible": "default",
+        "label": "exposure.fields.labels.art.nf"
+    }, {
         "name": "activity",
         "group": "activity",
         "label": "exposure.fields.labels.art.activity-class",
@@ -200,5 +206,113 @@
                 ]
             } 
         ]
+    }, {
+        "name": "site",
+        "group": "controls",
+        "type": "select",
+        "visible": "default",
+        "label": "exposure.fields.labels.art.site",
+        "options": [
+            {
+                "label": "exposure.fields.options.art.indoors",
+                "value": "indoors"
+            }, {
+                "label": "exposure.fields.options.art.outdoors",
+                "value": "outdoors"
+            }, {
+                "label": "exposure.fields.options.art.spray-room",
+                "value": "spray-room"
+            }, {
+                "label": "exposure.fields.options.art.flow-booth",
+                "value": "flow-booth"
+            }
+        ]
+    }, {
+        "name": "ventilation",
+        "group": "controls",
+        "type": "select",
+        "conditions": [
+            "data.site === 'indoors'"
+        ],
+        "label": "exposure.fields.labels.art.ventilation",
+        "options": [
+            {
+                "label": "exposure.fields.options.art.no-restrictions",
+                "value": "no-restrictions"
+            }, {
+                "label": "exposure.fields.options.art.natural",
+                "value": "natural"
+            }, {
+                "label": "exposure.fields.options.art.mechanical",
+                "value": "mechanical"
+            }, {
+                "label": "exposure.fields.options.art.specialized",
+                "value": "specialized"
+            }, {
+                "label": "exposure.fields.options.art.ach-0-3",
+                "value": "ach-0-3"
+            }, {
+                "label": "exposure.fields.options.art.ach-3",
+                "value": "ach-3"
+            }, {
+                "label": "exposure.fields.options.art.ach-10",
+                "value": "ach-10"
+            }, {
+                "label": "exposure.fields.options.art.ach-30",
+                "value": "ach-30"
+            }
+        ]
+    }, {
+        "name": "volume",
+        "group": "controls",
+        "type": "select",
+        "conditions": [
+            "data.site === 'indoors'"
+        ],
+        "label": "exposure.fields.labels.art.volume",
+        "options": [
+            {
+                "label": "exposure.fields.options.art.any-room",
+                "value": "any-room"
+            }, {
+                "label": "exposure.fields.options.art.small-room",
+                "value": "small-room"
+            }, {
+                "label": "exposure.fields.options.art.large-room",
+                "value": "large-room"
+            }, {
+                "label": "exposure.fields.options.art.vol-30",
+                "value": "vol-30"
+            }, {
+                "label": "exposure.fields.options.art.vol-100",
+                "value": "vol-100"
+            }, {
+                "label": "exposure.fields.options.art.vol-300",
+                "value": "vol-300"
+            }, {
+                "label": "exposure.fields.options.art.vol-1000",
+                "value": "vol-1000"
+            }, {
+                "label": "exposure.fields.options.art.vol-3000",
+                "value": "vol-3000"
+            }
+        ]
+    }, {
+        "name": "building",
+        "group": "controls",
+        "type": "checkbox",
+        "conditions": [
+            "data.site === 'outdoors'"
+        ],
+        "label": "exposure.fields.labels.art.building"
+    }, {
+        "name": "ffdistance",
+        "group": "controls",
+        "type": "checkbox",
+        "conditions": [
+            "data.site === 'outdoors'",
+            "data.nf !== true"
+        ],
+        "label": "exposure.fields.labels.art.ff-distance"
     }
 ]

@@ -9,11 +9,14 @@ import {
     InputNumber,
     Radio,
     Select,
-    Space 
+    Space, 
+    Tooltip
 } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { SaveOutlined } from '@ant-design/icons';
+import { QuestionCircleOutlined, SaveOutlined } from '@ant-design/icons';
 import Checkbox from 'antd/lib/checkbox/Checkbox';
+import ART from './results/ART';
+import { formatCountdown } from 'antd/lib/statistic/utils';
 
 
 /*
@@ -25,14 +28,14 @@ import Checkbox from 'antd/lib/checkbox/Checkbox';
     in 'data' using 'setData' as a React state
 */
 
-function Assessment() {
+function Assessment(props) {
 
     // data is in format {field: value}
     const [ state, setState ] = useState({});
     const [ data, setData ] = useState({});
     const [ visibility, setVisibility ] = useState([]);
     const { t } = useTranslation();
-    const model = 'ecetoc';
+    const model = props.match.params.model;
     const myjson = require(`../../json/exposure/${model}.json`);
 
 
@@ -162,9 +165,9 @@ function Assessment() {
                         {
                             options.map(
                                 option => (
-                                    <Radio.Button key={option.value} value={option.value}>
+                                    <Radio key={option.value} value={option.value}>
                                         {t(option.label)}
-                                    </Radio.Button>
+                                    </Radio>
                                 )
                             )
                         }
@@ -190,7 +193,7 @@ function Assessment() {
     // panels of collaps
     // this is what is used for REACH models: ART, Stoffenmanager and ECETOC TRA
     // but may differ for others (e.g. if physical-chemical are considered)
-    const panels = ['product', 'activity', 'controls', 'results'];
+    const panels = ['product', 'activity', 'controls'];
 
 
     // important to set checkbox values to false on initial state
@@ -202,11 +205,28 @@ function Assessment() {
         }
     }
 
+    // different fields - different labels
+    const setLabel = item => {
+        if (item.type === 'checkbox') return "";
+        if (item.info) {
+            return (
+                <Space>
+                    <span>{t(item.label)}</span>
+                    <Tooltip title={t(item.info)}>
+                        <QuestionCircleOutlined style={{ color: "#1890ff" }} />
+                    </Tooltip>
+                </Space>
+            )
+        }
+        else return t(item.label);
+    }
+    
+
 
     return(
         <div>
             <Form 
-                onValuesChange={(_, values) => setData(values)}
+                onValuesChange={(_, values, ) => setData(values)}
                 labelCol={{ md: {span: 4} }}
                 wrapperCol={{ md: {span: 16} }}
                 onFinish={values => console.log(values)}
@@ -253,9 +273,7 @@ function Assessment() {
                                         <Form.Item
                                             key={item.name}
                                             name={item.name}
-                                            label={
-                                                item.type === 'checkbox' ? "" : t(item.label)
-                                            }
+                                            label={setLabel(item)}
                                             wrapperCol={
                                                 item.type === 'checkbox' ? 
                                                     { md: { offset: 4 } } : ''
@@ -274,7 +292,11 @@ function Assessment() {
                             </Panel>
                         )
                     )
-                }</Collapse>
+                }
+                <Panel header={t('exposure.assessment.var-groups.results')}>
+                    { model === 'art' ? <ART values={data} /> : '' }
+                </Panel>
+                </Collapse>
             </Form>
         </div>
     )

@@ -309,7 +309,7 @@
         "type": "select",
         "label": "exposure.fields.labels.ecetoc.rpe",
         "visible": "default",
-        "info": "info-rpe",
+        "info": "exposure.fields.labels.ecetoc.rpe-info",
         "options": [
             {
                 "label": "exposure.fields.options.ecetoc.no-rpe",
