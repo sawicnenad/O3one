@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { 
     Form,
     Input,
@@ -21,6 +21,8 @@ import {
     SaveOutlined 
 } from '@ant-design/icons';
 import { Link, useRouteMatch } from 'react-router-dom';
+import { ApiContext } from '../../context/ApiContext';
+import axios from 'axios';
 
 /*
     Create new or edit an existing exposure situation
@@ -35,17 +37,18 @@ function ExposureSituation(props) {
     const [ state, setState ] = useState({});
     const { t } = useTranslation();
     const { url } = useRouteMatch();
-
+    const apiContext = useContext(ApiContext);
     const esid = parseInt(props.match.params.id);
+    const requestType = esid === 0 ? 'post' : 'put';
+    const apiURL = (
+        esid === 0 
+        ? `${apiContext.api}/exposure/scenarios/`
+        : `${apiContext.api}/exposure/scenarios/${esid}`
+    )
     let es = {};
     const [testForm] = Form.useForm();
 
 
-    if (esid !== 0) {
-        const data = JSON.parse(localStorage.getItem('es'));
-        es = data.find(o => o.id === esid);
-    }
-    console.log(es)
     useEffect(() => {
         
         if (!es.chemtype) es.chemtype = "none"
@@ -94,8 +97,18 @@ function ExposureSituation(props) {
                 labelCol={{ md: { span: 4 }}}
                 wrapperCol={{ md: { span: 16 } }}
                 onFinish={values => {
+                    axios({
+                        url: apiURL,
+                        method: requestType,
+                        data: values
+                    }).then(
+                        res => console.log(res.data)
+                    ).catch(
+                        e => console.log(e)
+                    )
+
+                    return
                     let es = values;
-                    es.id = Math.round(Math.random() * 100);
                     let date = new Date( Date.now() );
                     es.created = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
                     let fromLocalStorage = (localStorage.getItem('es') ? 

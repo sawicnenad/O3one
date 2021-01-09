@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from .models import (Scenario)
+from .serializers import (ScenarioSer)
 
-# Create your views here.
+class ScenarioView(viewsets.ModelViewSet):
+    queryset = Scenario.objects.all()
+    serializer_class = ScenarioSer

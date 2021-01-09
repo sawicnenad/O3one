@@ -4,6 +4,7 @@ import Exposure from './views/Exposure';
 import './styling/app.css';
 import Navigation from './components/Navigation';
 import { Layout } from 'antd';
+import ApiContextProvider from './context/ApiContext';
 
 function App() {
 
@@ -11,25 +12,27 @@ function App() {
 
     return(
         <Suspense fallback="loading">
-            <BrowserRouter>
-                <Layout className="layout-wrapper">
-                    <Header style={{ background: "white" }}>
-                        <Navigation />
-                    </Header>
-                    
-                    <Content 
-                        style={{ 
-                            minHeight: "90vh",
-                            padding: "25px 65px" 
-                        }}
-                    >
-                        <Switch>
-                            <Route path={`/exposure`} component={Exposure} />
-                        </Switch>
-                    </Content>
-                </Layout>
+            <ApiContextProvider>
+                <BrowserRouter>
+                    <Layout className="layout-wrapper">
+                        <Header style={{ background: "white" }}>
+                            <Navigation />
+                        </Header>
+                        
+                        <Content 
+                            style={{ 
+                                minHeight: "90vh",
+                                padding: "25px 65px" 
+                            }}
+                        >
+                            <Switch>
+                                <Route path={`/exposure`} component={Exposure} />
+                            </Switch>
+                        </Content>
+                    </Layout>
 
-            </BrowserRouter>
+                </BrowserRouter>
+            </ApiContextProvider>
         </Suspense>
     );
 }
