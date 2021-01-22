@@ -25,6 +25,11 @@ function Navigation() {
                         {t('nav.home')}
                     </Link>
                 </Menu.Item>
+                <Menu.Item key="data">
+                    <Link to="/data">
+                        {t('nav.data')} 
+                    </Link>
+                </Menu.Item>
                 <Menu.Item key="exposure">
                     <Link to="/exposure">
                         {t('nav.exposure')} 

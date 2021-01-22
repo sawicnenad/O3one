@@ -36,3 +36,17 @@
    padding-top: 5px;
    padding-bottom: 5px;
 }
+
+.div-as-button {
+   border-bottom: 3px solid #ebebeb;
+   width: 100%;
+}
+
+.div-as-button:hover {
+   border-bottom: 3px solid #1890ff;
+   cursor: pointer;
+}
+
+.div-as-button-active {
+   border-bottom: 3px solid #1890ff;
+}

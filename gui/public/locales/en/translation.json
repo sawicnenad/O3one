@@ -27,6 +27,7 @@
     },
     "nav": {
         "home": "Home",
+        "data": "My Data",
         "exposure": "Exposure"
     },
     "models": {
@@ -34,6 +35,12 @@
         "stoffenmanager": "Stoffenmanager",
         "ecetoc": "ECETOC TRAv3",
         "o3-description": "O3 employs a machine learning technique - constantly trained on evidence data - to predict the exposure"
+    },
+    "data": {
+        "suppliers": "Suppliers",
+        "substances": "Substances",
+        "mixtures": "Mixtures",
+        "workplaces": "Workplaces"
     },
     "exposure": {
         "risk": {
