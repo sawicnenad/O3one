@@ -4,8 +4,8 @@ import Exposure from './views/Exposure';
 import './styling/app.css';
 import Navigation from './components/Navigation';
 import { Layout } from 'antd';
-import ApiContextProvider from './context/ApiContext';
 import Data from './views/Data';
+import ContextProvider from './context/Context';
 
 function App() {
 
@@ -13,7 +13,7 @@ function App() {
 
     return(
         <Suspense fallback="loading">
-            <ApiContextProvider>
+            <ContextProvider>
                 <BrowserRouter>
                     <Layout className="layout-wrapper" style={{ background: "none" }}>
                         <Header style={{ background: "none"  }}>
@@ -36,7 +36,7 @@ function App() {
                     </Layout>
 
                 </BrowserRouter>
-            </ApiContextProvider>
+            </ContextProvider>
         </Suspense>
     );
 }

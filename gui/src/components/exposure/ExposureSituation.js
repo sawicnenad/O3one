@@ -21,7 +21,7 @@ import {
     SaveOutlined 
 } from '@ant-design/icons';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { ApiContext } from '../../context/ApiContext';
+import { Context } from '../../context/Context';
 import axios from 'axios';
 
 /*
@@ -37,13 +37,13 @@ function ExposureSituation(props) {
     const [ state, setState ] = useState({});
     const { t } = useTranslation();
     const { url } = useRouteMatch();
-    const apiContext = useContext(ApiContext);
+    const context = useContext(Context);
     const esid = parseInt(props.match.params.id);
     const requestType = esid === 0 ? 'post' : 'put';
     const apiURL = (
         esid === 0 
-        ? `${apiContext.api}/exposure/scenarios/`
-        : `${apiContext.api}/exposure/scenarios/${esid}`
+        ? `${context.api}/exposure/scenarios/`
+        : `${context.api}/exposure/scenarios/${esid}`
     )
     let es = {};
     const [testForm] = Form.useForm();
